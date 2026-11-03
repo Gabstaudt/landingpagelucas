@@ -34,7 +34,9 @@ npm start
 - `public/og-image.png`: prévia de compartilhamento (1200 × 630).
 - `public/assets/brand/logo-seo.png`: símbolo oficial em PNG para os dados estruturados.
 
-O domínio padrão é `https://lrferreira.adv.br`. Para alterá-lo, configure `SITE_URL` antes do build (consulte `.env.example`). Canonical, sitemap e dados estruturados usam essa mesma origem.
+O endereço padrão é `https://lrferreiraadv.netlify.app`. Nos builds do Netlify, a variável automática `URL` fornece o endereço público do site. `SITE_URL`, quando definida, tem prioridade; use-a apenas com um domínio já conectado e acessível (consulte `.env.example`). Canonical, imagem de compartilhamento, sitemap e dados estruturados usam essa mesma origem.
+
+Se a prévia de compartilhamento apontar para um domínio antigo, remova ou corrija `SITE_URL` no painel do Netlify e faça um novo deploy. A imagem deve responder em `https://SEU-DOMINIO/og-image.png` com status 200 e tipo `image/png`.
 
 Após publicar, cadastre o domínio no Google Search Console e envie `/sitemap.xml`. Caso utilize verificação por metatag, defina `GOOGLE_SITE_VERIFICATION` com o token fornecido pelo Google e refaça o build. Nenhum token fictício é incluído.
 

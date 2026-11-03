@@ -1,4 +1,7 @@
-export const siteUrl = new URL(process.env.SITE_URL || "https://lrferreira.adv.br").origin;
+// Netlify exposes the site's public URL at build time. An explicit SITE_URL
+// overrides it when a custom domain has already been connected.
+const netlifyUrl = process.env.NETLIFY === "true" ? process.env.URL : undefined;
+export const siteUrl = new URL(process.env.SITE_URL || netlifyUrl || "https://lrferreiraadv.netlify.app").origin;
 export const siteName = "L R Ferreira Advocacia";
 export const siteTitle = "L R Ferreira Advocacia | Lucas Ruan Ferreira Gomes";
 export const siteDescription = "Advocacia e consultoria jurídica para pessoas e empresas. Conheça Lucas Ruan Ferreira Gomes, OAB/PA 43.942, e agende seu atendimento.";
