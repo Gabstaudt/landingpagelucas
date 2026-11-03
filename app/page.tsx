@@ -99,7 +99,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <header className="fixed left-1/2 top-4 z-50 w-[min(1180px,calc(100%-40px))] -translate-x-1/2 rounded-md border border-white/10 px-4 py-3 glass">
+      <header className="fixed left-1/2 top-4 z-50 w-[min(1180px,calc(100%-40px))] -translate-x-1/2 rounded-sm border border-white/20 px-4 py-3 glass">
         <div className="flex items-center justify-between gap-4">
           <a href="#hero" aria-label="L R Ferreira Advocacia — início" className="shrink-0" onClick={() => setMenuOpen(false)}>
             <Image src="/assets/brand/horizontal-dark.svg" alt="L R Ferreira Advocacia" width={1200} height={388} priority className="h-auto w-[156px] sm:w-[184px] lg:w-[200px]" />
@@ -109,8 +109,8 @@ export default function Home() {
             <span className={menuOpen ? "menu-line menu-line-open-last" : "menu-line"} />
           </button>
           <nav id="main-navigation" aria-label="Navegação principal" className={`main-navigation ${menuOpen ? "is-open" : ""}`} onClick={event => { if ((event.target as HTMLElement).closest("a")) setMenuOpen(false); }}>
-            <a href="#atuacao">Atuação</a><a href="#metodo">Método</a><a href="#insights">Insights</a><a href="#sobre">Sobre</a>
-            <a href="#contato" className="rounded-sm border border-white/15 px-4 py-2">Agendar conversa</a>
+            <a href="#atuacao">Atuação</a><a href="#metodo">Método</a><a href="#insights">Conteúdo</a><a href="#sobre">Sobre</a>
+            <a href="#contato" className="institutional-button rounded-sm border border-white/30 px-4 py-2">Agendar atendimento</a>
           </nav>
         </div>
       </header>
@@ -119,12 +119,12 @@ export default function Home() {
         <section id="hero" className="relative min-h-[100svh] overflow-hidden bg-[#0E2F36] text-[#EFF3F0]">
           <div className="container-shell flex min-h-[100svh] items-center pt-36 pb-16">
             <div className="relative z-10 max-w-4xl">
-              <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.25 }} className="mb-5 inline-block text-sm tracking-[.32em] text-[#A9BDB5]">ADVOCACIA E CONSULTORIA</motion.span>
+              <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.25 }} className="section-label mb-5 inline-block text-sm tracking-[.32em] text-[#A9BDB5]">ADVOCACIA E CONSULTORIA</motion.span>
               <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.35, duration: .75 }} className="font-newsreader text-balance text-[clamp(2.9rem,8.5vw,7.2rem)] leading-[.92] tracking-[-.04em]">Segurança jurídica<br/>em cada decisão.</motion.h1>
-              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.5, duration: .7 }} className="mt-6 max-w-2xl text-lg leading-8 text-white/75">Orientação jurídica para pessoas e empresas, com escuta atenta, clareza e uma atuação dedicada a cada situação.</motion.p>
+              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.5, duration: .7 }} className="mt-6 max-w-2xl text-lg leading-8 text-white/75">Assessoria jurídica para pessoas e empresas, com rigor técnico, discrição e compromisso com a defesa de seus interesses.</motion.p>
               <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.65, duration: .7 }} className="mt-8 flex flex-wrap gap-3">
-                <a href="#contato" className="rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36] transition hover:-translate-y-0.5">Agendar uma conversa</a>
-                <a href="#atuacao" className="rounded-sm border border-white/15 px-6 py-3 transition hover:bg-white/5">Conhecer a atuação</a>
+                <a href="#contato" className="institutional-button rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar atendimento</a>
+                <a href="#atuacao" className="institutional-button rounded-sm border border-white/30 px-6 py-3">Conhecer a atuação</a>
               </motion.div>
             </div>
           </div>
@@ -133,11 +133,11 @@ export default function Home() {
         <section className="bg-[#EFF3F0] py-28">
           <div className="container-shell grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
             <motion.div {...fade}>
-              <span className="mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">POSICIONAMENTO</span>
-              <h2 className="font-newsreader text-balance text-[clamp(2.7rem,5vw,4.5rem)] leading-[1] tracking-[-.03em]">Cada situação tem uma história. Cada decisão merece orientação.</h2>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-[#294047]">Na L R Ferreira, a atuação começa pela compreensão do que importa para você. Aliamos análise técnica, diálogo e planejamento para orientar pessoas e empresas na prevenção e na resolução de questões jurídicas.</p>
+              <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">O ESCRITÓRIO</span>
+              <h2 className="font-newsreader text-balance text-[clamp(2.7rem,5vw,4.5rem)] leading-[1] tracking-[-.03em]">Conhecimento jurídico e responsabilidade em cada decisão.</h2>
+              <p className="mt-6 max-w-xl text-lg leading-8 text-[#294047]">A L R Ferreira presta assessoria jurídica a pessoas e empresas, com análise criteriosa das particularidades de cada demanda. A atuação reúne conhecimento técnico, planejamento e comunicação clara na prevenção e na resolução de conflitos.</p>
             </motion.div>
-            <motion.figure {...fade} className="overflow-hidden rounded-md shadow-[0_30px_80px_rgba(7,28,34,.18)]">
+            <motion.figure {...fade} className="institutional-image overflow-hidden rounded-sm border border-[#0E2F36]/15">
               <Image src="/assets/meeting.png" alt="Reunião com análise de documentos" width={1672} height={941} className="h-full w-full object-cover" sizes="(min-width: 1024px) 560px, calc(100vw - 40px)" />
             </motion.figure>
           </div>
@@ -146,11 +146,11 @@ export default function Home() {
         <section id="atuacao" className="bg-[#F7FAF8] py-28">
           <div className="container-shell">
             <motion.div {...fade} className="max-w-3xl">
-              <span className="mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">ÁREAS DE ATUAÇÃO</span>
-              <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none tracking-[-.03em]">Diferentes áreas do Direito. Atenção a cada necessidade.</h2>
+              <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">ÁREAS DE ATUAÇÃO</span>
+              <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none tracking-[-.03em]">Atuação jurídica com análise criteriosa e orientação clara.</h2>
             </motion.div>
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i*.04 }} className="min-h-64 rounded-md border border-[#0E2F36]/10 bg-[#EFF3F0] p-7 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(7,28,34,.10)]"><span className="text-sm tracking-[.24em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.article>)}
+              {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i*.04 }} className="practice-card min-h-64 border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.24em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.article>)}
             </div>
           </div>
         </section>
@@ -158,7 +158,7 @@ export default function Home() {
         <section className="relative overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell relative z-10">
             <motion.div {...fade} className="max-w-4xl">
-              <span className="mb-4 inline-block text-sm tracking-[.3em] text-white/60">MANIFESTO</span>
+              <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-white/60">COMPROMISSO</span>
               <h2 className="font-newsreader text-[clamp(3rem,7vw,5.5rem)] leading-none tracking-[-.04em]">Estrutura antes da decisão.</h2>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">Decisões que envolvem seus direitos, sua família, seu patrimônio ou sua empresa merecem atenção. Nosso compromisso é compreender o contexto, apresentar caminhos com clareza e acompanhar cada etapa com responsabilidade.</p>
             </motion.div>
@@ -166,36 +166,42 @@ export default function Home() {
         </section>
 
         <section id="sobre" className="bg-[#EFF3F0] py-28">
-          <div className="container-shell grid gap-8 lg:grid-cols-[1.1fr_.9fr]">
-            <motion.div {...fade}>
-              <span className="mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">SOBRE</span>
+          <div className="container-shell grid items-center gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
+            <motion.div {...fade} className="min-w-0">
+              <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">SOBRE MIM</span>
               <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Lucas Ruan Ferreira Gomes</h2>
-              <p className="mt-3 text-sm tracking-[.16em] text-[#2F6168]">ADVOGADO · ASSESSORIA JURÍDICA</p>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#294047]">Atuação voltada a pessoas e empresas que buscam orientação jurídica em diferentes momentos da vida. O trabalho combina análise técnica e atendimento próximo para compreender cada demanda e construir caminhos adequados, com linguagem clara e responsabilidade.</p>
+              <p className="mt-4 text-sm font-medium tracking-[.12em] text-[#2F6168]">ADVOGADO · OAB/PA 43.942</p>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#294047]">Advogado formado pela UNAMA, inscrito na Ordem dos Advogados do Brasil, Seção Pará, sob o nº 43.942. Atua na orientação e na defesa dos interesses de pessoas e empresas, com rigor técnico, clareza e responsabilidade.</p>
+              <dl className="mt-8 grid gap-5 border-t border-[#0E2F36]/15 pt-6 sm:grid-cols-2">
+                <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">FORMAÇÃO</dt><dd className="mt-2 text-sm font-medium">Direito · UNAMA</dd></div>
+                <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">INSCRIÇÃO PROFISSIONAL</dt><dd className="mt-2 text-sm font-medium">OAB/PA 43.942</dd></div>
+              </dl>
             </motion.div>
-            <motion.div {...fade} className="rounded-md border border-[#0E2F36]/10 bg-white/40 p-7 shadow-[0_20px_50px_rgba(7,28,34,.08)]"><span className="text-xs tracking-[.25em] text-[#2F6168]">DIRETRIZ</span><p className="font-newsreader mt-4 text-3xl">“Orientação próxima. Atuação responsável.”</p><div className="mt-8 grid gap-4 text-sm"><div className="border-t border-[#0E2F36]/10 pt-4"><span className="block text-[#2F6168]">Nome institucional</span><strong>L R Ferreira</strong></div><div className="border-t border-[#0E2F36]/10 pt-4"><span className="block text-[#2F6168]">Atuação</span><strong>Advocacia e consultoria jurídica</strong></div><div className="border-t border-[#0E2F36]/10 pt-4"><span className="block text-[#2F6168]">Abordagem</span><strong>Estratégica, precisa e discreta</strong></div></div></motion.div>
+            <motion.figure {...fade} className="mx-auto w-full max-w-[400px] overflow-hidden rounded-sm border border-[#0E2F36]/15 lg:justify-self-end">
+              <Image src="/lucas/fotolucas.jpg" alt="Lucas Ruan Ferreira Gomes, advogado inscrito na OAB/PA 43.942" width={3024} height={4032} sizes="(min-width: 640px) 400px, calc(100vw - 40px)" className="aspect-[3/4] h-auto w-full object-cover" />
+            </motion.figure>
           </div>
         </section>
 
         <section id="metodo" className="bg-[#F7FAF8] py-28">
           <div className="container-shell">
-            <motion.div {...fade} className="max-w-3xl"><span className="mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">MÉTODO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Um processo claro para orientar decisões complexas.</h2></motion.div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[["01","Compreender","Sua história, seu contexto e seus objetivos."],["02","Estruturar","Caminhos jurídicos, riscos e possibilidades."],["03","Decidir","Recomendação técnica com segurança."],["04","Acompanhar","Implementação, ajustes e continuidade."]].map(([n,t,d]) => <motion.div key={n} {...fade} className="rounded-md border border-[#0E2F36]/10 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.22em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.div>)}</div>
+            <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">MÉTODO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Método e acompanhamento em cada etapa.</h2></motion.div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[["01","Compreender","Sua história, seu contexto e seus objetivos."],["02","Estruturar","Caminhos jurídicos, riscos e possibilidades."],["03","Decidir","Recomendação técnica com segurança."],["04","Acompanhar","Implementação, ajustes e continuidade."]].map(([n,t,d]) => <motion.div key={n} {...fade} className="method-card border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.22em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.div>)}</div>
           </div>
         </section>
 
         <section id="insights" className="bg-[#EFF3F0] py-28">
           <div className="container-shell">
-            <motion.div {...fade} className="max-w-3xl"><span className="mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">INSIGHTS</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Conteúdo para quem precisa decidir com base.</h2></motion.div>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{insights.map(([tag,t,d]) => <motion.article key={t} {...fade} className="flex min-h-72 flex-col rounded-md border border-[#0E2F36]/10 bg-white/35 p-7"><span className="text-xs tracking-[.22em] text-[#2F6168]">{tag}</span><h3 className="font-newsreader mt-5 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p><a href="#contato" className="mt-auto pt-8">Ler mais</a></motion.article>)}</div>
+            <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">CONTEÚDO JURÍDICO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Informação jurídica para decisões conscientes.</h2></motion.div>
+            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{insights.map(([tag,t,d]) => <motion.article key={t} {...fade} className="insight-card flex min-h-72 flex-col border border-[#0E2F36]/15 bg-white/35 p-7"><span className="text-xs tracking-[.22em] text-[#2F6168]">{tag}</span><h3 className="font-newsreader mt-5 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p><a href="#contato" className="editorial-link mt-auto pt-8">Conversar sobre o tema</a></motion.article>)}</div>
           </div>
         </section>
 
         <section id="contato" className="bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell">
-            <motion.div {...fade} className="grid gap-10 rounded-md border border-white/10 bg-white/[.03] p-5 sm:p-8 lg:grid-cols-[1.1fr_.9fr] lg:p-12">
-              <div><span className="mb-4 inline-block text-sm tracking-[.3em] text-white/60">CONTATO</span><h2 className="font-newsreader text-[clamp(2.8rem,6vw,5rem)] leading-none">Uma decisão importante começa por uma análise bem estruturada.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">Converse sobre o seu cenário e entenda os caminhos possíveis com segurança jurídica.</p></div>
-              <div className="lg:pt-8"><a href="mailto:lrferreira.adv@outlook.com" className="inline-flex rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar uma conversa</a><div className="mt-8 grid gap-4 text-sm"><div><span className="block text-white/50">E-mail</span><a href="mailto:lrferreira.adv@outlook.com">lrferreira.adv@outlook.com</a></div><div><span className="block text-white/50">WhatsApp</span><a href="https://wa.me/5591991831921">+55 91 99183-1921</a></div><div><span className="block text-white/50">Site</span><a href="https://lrferreira.adv.br">lrferreira.adv.br</a></div></div></div>
+            <motion.div {...fade} className="grid gap-10 rounded-sm border border-white/20 bg-white/[.02] p-5 sm:p-8 lg:grid-cols-[1.1fr_.9fr] lg:p-12">
+              <div><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-white/60">CONTATO</span><h2 className="font-newsreader text-[clamp(2.8rem,6vw,5rem)] leading-none">Orientação jurídica para decisões seguras.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">Entre em contato para apresentar sua demanda e agendar um atendimento.</p></div>
+              <div className="lg:pt-8"><a href="mailto:lrferreira.adv@outlook.com" className="institutional-button inline-flex rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar atendimento</a><div className="mt-8 grid gap-4 text-sm"><div><span className="block text-white/50">E-mail</span><a href="mailto:lrferreira.adv@outlook.com">lrferreira.adv@outlook.com</a></div><div><span className="block text-white/50">WhatsApp</span><a href="https://wa.me/5591991831921">+55 91 99183-1921</a></div><div><span className="block text-white/50">Site</span><a href="https://lrferreira.adv.br">lrferreira.adv.br</a></div></div></div>
             </motion.div>
           </div>
         </section>
