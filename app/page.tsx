@@ -116,17 +116,26 @@ export default function Home() {
       </header>
 
       <main id="conteudo">
-        <section id="hero" className="relative min-h-[100svh] overflow-hidden bg-[#0E2F36] text-[#EFF3F0]">
-          <div className="container-shell flex min-h-[100svh] items-center pt-36 pb-16">
-            <div className="relative z-10 max-w-4xl">
-              <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.25 }} className="section-label mb-5 inline-block text-sm tracking-[.32em] text-[#A9BDB5]">ADVOCACIA E CONSULTORIA</motion.span>
-              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.35, duration: .75 }} className="font-newsreader text-balance text-[clamp(2.9rem,8.5vw,7.2rem)] leading-[.92] tracking-[-.04em]">Segurança jurídica<br/>em cada decisão.</motion.h1>
-              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.5, duration: .7 }} className="mt-6 max-w-2xl text-lg leading-8 text-white/75">Assessoria jurídica para pessoas e empresas, com rigor técnico, discrição e compromisso com a defesa de seus interesses.</motion.p>
+        <section id="hero" className="hero-section relative min-h-[100svh] overflow-hidden bg-[#0E2F36] text-[#EFF3F0]">
+          <div className="hero-light" aria-hidden="true" />
+          <motion.div aria-hidden="true" className="hero-architecture" initial={reducedMotion ? false : { opacity: 0, scaleY: .8 }} animate={{ opacity: 1, scaleY: 1 }} transition={{ delay: reducedMotion ? 0 : 2.3, duration: 1.6, ease: "easeOut" }} />
+          <div className="container-shell hero-shell relative z-10">
+            <div className="hero-copy max-w-4xl">
+              <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.25 }} className="hero-eyebrow section-label mb-5 inline-flex items-center gap-4 text-sm tracking-[.32em] text-[#A9BDB5]">ADVOCACIA E CONSULTORIA</motion.span>
+              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.35, duration: .75 }} className="font-newsreader text-balance text-[clamp(2.9rem,8.5vw,7.2rem)] leading-[.92] tracking-[-.04em]">Segurança jurídica<br/><span className="hero-title-accent">em cada decisão.</span></motion.h1>
+              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.5, duration: .7 }} className="mt-7 max-w-xl text-base leading-8 text-white/80 sm:text-lg">Assessoria jurídica para pessoas e empresas, com rigor técnico, discrição e compromisso com a defesa de seus interesses.</motion.p>
               <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.65, duration: .7 }} className="mt-8 flex flex-wrap gap-3">
-                <a href="#contato" className="institutional-button rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar atendimento</a>
+                <a href="#contato" className="institutional-button rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar atendimento <span aria-hidden="true" className="ml-5">↗</span></a>
                 <a href="#atuacao" className="institutional-button rounded-sm border border-white/30 px-6 py-3">Conhecer a atuação</a>
               </motion.div>
             </div>
+            <motion.div className="hero-signature" initial={reducedMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : 2.9, duration: .8 }}>
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
+                <span className="hero-signature-name">LUCAS RUAN FERREIRA GOMES</span>
+                <span className="text-xs tracking-[.1em] text-[#A9BDB5]">OAB/PA 43.942</span>
+              </div>
+              <a href="#atuacao" className="hero-explore"><span>Explore a atuação</span><span className="hero-scroll-line" aria-hidden="true" /></a>
+            </motion.div>
           </div>
         </section>
 
