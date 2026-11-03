@@ -47,7 +47,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--sage); outline-
 .menu-line + .menu-line { top: 25px; }
 .menu-line-open-first { top: 21px; transform: rotate(45deg); }
 .menu-line + .menu-line-open-last { top: 21px; transform: rotate(-45deg); }
-.main-navigation { position: absolute; top: calc(100% + 10px); left: 0; right: 0; display: flex; flex-direction: column; gap: 8px; padding: 16px; border: 1px solid #ffffff1a; border-radius: 16px; background: #0e2f36fa; color: var(--mist); visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s ease, transform .25s ease, visibility .25s; max-height: calc(100dvh - 130px); overflow-y: auto; }
+.main-navigation { position: absolute; top: calc(100% + 10px); left: 0; right: 0; display: flex; flex-direction: column; gap: 8px; padding: 16px; border: 1px solid #ffffff1a; border-radius: 6px; background: #0e2f36fa; color: var(--mist); visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s ease, transform .25s ease, visibility .25s; max-height: calc(100dvh - 130px); overflow-y: auto; }
 .main-navigation.is-open { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
 .main-navigation a { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; transition: color .2s ease, background-color .2s ease; }
 .main-navigation a:hover { color: var(--sage); }
