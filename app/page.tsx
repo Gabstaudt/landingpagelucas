@@ -4,6 +4,8 @@ import Image from "next/image";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { AnimatedLogo } from "@/components/AnimatedLogo";
+import { ProcessExplorer } from "@/components/ProcessExplorer";
+import { ContactGuide } from "@/components/ContactGuide";
 import { Disclosure } from "@/components/Disclosure";
 import { LogoMark } from "@/components/LogoMark";
 
@@ -130,6 +132,14 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
+      <AnimatePresence>
+        {!loading && activeSection !== "hero" && activeSection !== "contato" && <motion.a
+          href="https://wa.me/5591991831921?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20um%20atendimento%20jur%C3%ADdico."
+          className="quick-contact"
+          initial={{ opacity: 0, y: reducedMotion ? 0 : 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reducedMotion ? 0 : 20 }} transition={{ duration: .3 }}
+        ><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-9 9 10 10 0 0 1-4-.9L3 21l1.4-4.7A9 9 0 1 1 21 11.5Z" /><path d="M8 10h8M8 14h5" /></svg><span>Falar com o advogado</span><span aria-hidden="true">↗</span></motion.a>}
+      </AnimatePresence>
+
       <header className="fixed left-1/2 top-4 z-50 w-[min(1180px,calc(100%-40px))] -translate-x-1/2 rounded-sm border border-white/20 px-4 py-3 glass">
         <motion.div aria-hidden="true" className="reading-progress" style={{ scaleX: scrollYProgress }} />
         <div className="flex items-center justify-between gap-4">
@@ -243,14 +253,14 @@ export default function Home() {
         <section id="metodo" className="method-section relative isolate overflow-hidden bg-[#F7FAF8] py-28">
           <div className="container-shell">
             <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">MÉTODO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Método e acompanhamento em cada etapa.</h2></motion.div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[["01","Compreender","Sua história, seu contexto e seus objetivos."],["02","Estruturar","Caminhos jurídicos, riscos e possibilidades."],["03","Decidir","Recomendação técnica com segurança."],["04","Acompanhar","Implementação, ajustes e continuidade."]].map(([n,t,d], i) => <motion.div key={n} {...fade} transition={{ ...fade.transition, delay: i * .12 }} className="method-card border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.22em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.div>)}</div>
+            <motion.div {...fade} className="mt-10"><ProcessExplorer /></motion.div>
           </div>
         </section>
 
         <section id="insights" className="bg-[#EFF3F0] py-28">
           <div className="container-shell">
             <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">CONTEÚDO JURÍDICO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Informação jurídica para decisões conscientes.</h2></motion.div>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{insights.map(([tag,t,d]) => <motion.article key={t} {...fade} className="insight-card flex min-h-72 flex-col border border-[#0E2F36]/15 bg-white/35 p-7"><span className="text-xs tracking-[.22em] text-[#2F6168]">{tag}</span><h3 className="font-newsreader mt-5 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p><a href="#contato" className="editorial-link mt-auto pt-8">Conversar sobre o tema</a></motion.article>)}</div>
+            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{insights.map(([tag,t,d]) => <motion.article key={t} {...fade} className="insight-card flex min-h-72 flex-col border border-[#0E2F36]/15 bg-white/35 p-7"><span className="text-xs tracking-[.22em] text-[#2F6168]">{tag}</span><h3 className="font-newsreader mt-5 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p><a href={`https://wa.me/5591991831921?text=${encodeURIComponent(`Olá, gostaria de conversar sobre ${tag.toLowerCase()}: ${t}`)}`} className="editorial-link mt-auto pt-8">Conversar sobre o tema <span aria-hidden="true">↗</span></a></motion.article>)}</div>
           </div>
         </section>
 
@@ -267,16 +277,25 @@ export default function Home() {
 
         <section id="contato" className="contact-section relative isolate overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell">
-            <motion.div {...fade} className="grid gap-10 rounded-sm border border-white/20 bg-white/[.02] p-5 sm:p-8 lg:grid-cols-[1.1fr_.9fr] lg:p-12">
-              <div><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-white/60">CONTATO</span><h2 className="font-newsreader text-[clamp(2.8rem,6vw,5rem)] leading-none">Orientação jurídica para decisões seguras.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">Entre em contato para apresentar sua demanda e agendar um atendimento.</p></div>
-              <div className="lg:pt-8">
-                <p className="mb-5 text-sm leading-7 text-white/75">Apresente sua demanda diretamente ao escritório.</p>
-                <a href="https://wa.me/5591991831921?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20atendimento%20jur%C3%ADdico." className="institutional-button inline-flex rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar pelo WhatsApp <span aria-hidden="true" className="ml-4">↗</span></a>
-                <a href="mailto:lrferreira.adv@outlook.com" className="contact-email-action">Prefiro entrar em contato por e-mail <span aria-hidden="true">↗</span></a>
-                <div className="mt-8 grid gap-4 text-sm"><div><span className="block text-white/50">E-mail</span><a href="mailto:lrferreira.adv@outlook.com">lrferreira.adv@outlook.com</a></div><div><span className="block text-white/50">WhatsApp</span><a href="https://wa.me/5591991831921">+55 91 99183-1921</a></div><div><span className="block text-white/50">Site</span><a href="https://lrferreira.adv.br">lrferreira.adv.br</a></div></div></div>
-            </motion.div>
+            <div className="contact-layout">
+              <motion.div {...fade} className="contact-intro">
+                <span className="section-label mb-4 inline-block text-white/60">SEU PRÓXIMO PASSO</span>
+                <h2 className="font-newsreader text-[clamp(2.8rem,5.5vw,5rem)] leading-none">Vamos cuidar do que importa para você.</h2>
+                <p className="mt-7 max-w-xl text-lg leading-8 text-white/75">Uma conversa para compreender sua demanda, organizar as informações e avaliar os próximos passos.</p>
+                <div className="contact-lawyer">
+                  <Image src="/lucas/fotolucas.jpg" alt="" width={3024} height={4032} sizes="64px" className="h-20 w-16 object-cover object-top" />
+                  <div><p className="font-newsreader text-2xl">Lucas Ruan Ferreira Gomes</p><p className="mt-2 text-xs tracking-[.12em] text-[#A9BDB5]">ADVOGADO · OAB/PA 43.942</p></div>
+                </div>
+                <div className="contact-direct-details">
+                  <a href="https://wa.me/5591991831921"><span>WhatsApp</span><span>+55 91 99183-1921 ↗</span></a>
+                  <a href="mailto:lrferreira.adv@outlook.com"><span>E-mail</span><span>lrferreira.adv@outlook.com ↗</span></a>
+                </div>
+              </motion.div>
+              <motion.div {...fade} transition={{ ...fade.transition, delay: .12 }} className="min-w-0"><ContactGuide /></motion.div>
+            </div>
           </div>
         </section>
+
       </main>
 
       <footer className="border-t border-[#0E2F36]/10 bg-[#E3EBE7] py-10">
