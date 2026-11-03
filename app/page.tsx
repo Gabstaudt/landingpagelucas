@@ -171,7 +171,10 @@ export default function Home() {
               <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">SOBRE MIM</span>
               <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Lucas Ruan Ferreira Gomes</h2>
               <p className="mt-4 text-sm font-medium tracking-[.12em] text-[#2F6168]">ADVOGADO · OAB/PA 43.942</p>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#294047]">Advogado formado pela UNAMA, inscrito na Ordem dos Advogados do Brasil, Seção Pará, sob o nº 43.942. Atua na orientação e na defesa dos interesses de pessoas e empresas, com rigor técnico, clareza e responsabilidade.</p>
+              <div className="mt-6 max-w-2xl space-y-5 text-lg leading-8 text-[#294047]">
+                <p>Lucas Ruan Ferreira Gomes é advogado, natural de Belém do Pará, e está à frente da L R Ferreira Advocacia. Aprovado no 44º Exame de Ordem ainda no 9º período da graduação, construiu sua trajetória com disciplina nos estudos e compromisso com a qualidade técnica, valores que hoje definem sua prática profissional.</p>
+                <p>Seu trabalho une organização, proatividade e preparo: antecipar riscos, estruturar cada etapa cuidadosamente e fundamentar cada orientação com rigor. A comunicação é sempre clara e acessível, para que cada cliente compreenda seus direitos, suas alternativas e os próximos passos.</p>
+              </div>
               <dl className="mt-8 grid gap-5 border-t border-[#0E2F36]/15 pt-6 sm:grid-cols-2">
                 <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">FORMAÇÃO</dt><dd className="mt-2 text-sm font-medium">Direito · UNAMA</dd></div>
                 <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">INSCRIÇÃO PROFISSIONAL</dt><dd className="mt-2 text-sm font-medium">OAB/PA 43.942</dd></div>
