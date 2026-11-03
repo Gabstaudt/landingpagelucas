@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { AnimatedLogo } from "@/components/AnimatedLogo";
+import { Disclosure } from "@/components/Disclosure";
 import { LogoMark } from "@/components/LogoMark";
 
 const practices = [
@@ -13,6 +14,21 @@ const practices = [
   ["04", "Direito do Trabalho", "Orientação sobre relações de trabalho e atuação em demandas e negociações trabalhistas."],
   ["05", "Direito Empresarial", "Suporte jurídico para empresas em contratos, organização societária e decisões do negócio."],
   ["06", "Direito Tributário", "Consultoria, planejamento e atuação em questões fiscais nas esferas administrativa e judicial."]
+];
+
+const practiceTopics = [
+  ["Análise e elaboração de contratos", "Responsabilidade civil", "Questões patrimoniais"],
+  ["Questões familiares", "Inventários e partilhas", "Planejamento sucessório"],
+  ["Revisão de cobranças", "Problemas com produtos e serviços", "Conflitos nas relações de consumo"],
+  ["Análise de relações de trabalho", "Demandas trabalhistas", "Negociações e acordos"],
+  ["Contratos comerciais", "Organização societária", "Prevenção de conflitos empresariais"],
+  ["Consultoria e planejamento fiscal", "Demandas administrativas", "Discussões judiciais tributárias"]
+];
+
+const faqs = [
+  ["Como iniciar o atendimento?", "Entre em contato por WhatsApp ou e-mail e apresente brevemente sua demanda. Esse primeiro contato permite compreender o assunto e organizar os próximos passos do atendimento."],
+  ["O que reunir para a primeira conversa?", "Tenha em mãos um resumo dos fatos, as datas relevantes e os documentos relacionados ao assunto. Se houver algum prazo em andamento, informe isso já no primeiro contato."],
+  ["Como são definidos os honorários?", "Os honorários consideram a natureza da demanda, sua complexidade e o escopo da atuação. Entre em contato para conversar sobre o atendimento e as condições aplicáveis ao seu caso."]
 ];
 
 const insights = [
@@ -26,6 +42,7 @@ const fade = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
   const reducedMotion = useReducedMotion();
   const menuButton = useRef<HTMLButtonElement>(null);
   const { scrollY, scrollYProgress } = useScroll();
@@ -42,6 +59,20 @@ export default function Home() {
   const symbolY = useTransform(() => travelY.get() + (dock.y - travelY.get()) * dockProgress.get());
   const symbolRotate = useTransform(smoothProgress, [0, 1], [0, 360]);
   const floatingOpacity = useTransform(dockProgress, [0, .8, 1], [.14, .14, 0]);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
+      const current = sections.filter(section => section.getBoundingClientRect().top <= 180).pop();
+      setActiveSection(current?.id ?? "hero");
+      frame = 0;
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(frame); };
+  }, []);
 
   useEffect(() => {
     const measure = () => {
@@ -100,6 +131,7 @@ export default function Home() {
       </motion.div>
 
       <header className="fixed left-1/2 top-4 z-50 w-[min(1180px,calc(100%-40px))] -translate-x-1/2 rounded-sm border border-white/20 px-4 py-3 glass">
+        <motion.div aria-hidden="true" className="reading-progress" style={{ scaleX: scrollYProgress }} />
         <div className="flex items-center justify-between gap-4">
           <a href="#hero" aria-label="L R Ferreira Advocacia — início" className="shrink-0" onClick={() => setMenuOpen(false)}>
             <Image src="/assets/brand/horizontal-dark.svg" alt="L R Ferreira Advocacia" width={1200} height={388} priority className="h-auto w-[156px] sm:w-[184px] lg:w-[200px]" />
@@ -109,7 +141,7 @@ export default function Home() {
             <span className={menuOpen ? "menu-line menu-line-open-last" : "menu-line"} />
           </button>
           <nav id="main-navigation" aria-label="Navegação principal" className={`main-navigation ${menuOpen ? "is-open" : ""}`} onClick={event => { if ((event.target as HTMLElement).closest("a")) setMenuOpen(false); }}>
-            <a href="#atuacao">Atuação</a><a href="#metodo">Método</a><a href="#insights">Conteúdo</a><a href="#sobre">Sobre</a>
+            {[["atuacao", "Atuação"], ["sobre", "Sobre"], ["metodo", "Método"], ["insights", "Conteúdo"]].map(([id, label]) => <a key={id} href={`#${id}`} aria-current={activeSection === id ? "location" : undefined} className="navigation-link">{label}</a>)}
             <a href="#contato" className="institutional-button rounded-sm border border-white/30 px-4 py-2">Agendar atendimento</a>
           </nav>
         </div>
@@ -164,7 +196,15 @@ export default function Home() {
               </motion.div>
             </div>
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i*.04 }} className="practice-card min-h-64 border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.24em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.article>)}
+              {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i*.06 }} className="practice-card flex min-h-64 flex-col border border-[#0E2F36]/15 bg-[#EFF3F0] p-7">
+                <span className="text-sm tracking-[.24em] text-[#2F6168]">{n}</span>
+                <h3 className="font-newsreader mt-6 text-3xl">{t}</h3>
+                <p className="mb-6 mt-4 leading-7 text-[#294047]">{d}</p>
+                <div className="mt-auto"><Disclosure title="Como posso ajudar" context={t}>
+                  <ul className="practice-topics">{practiceTopics[i].map(topic => <li key={topic}>{topic}</li>)}</ul>
+                  <a href={`https://wa.me/5591991831921?text=${encodeURIComponent(`Olá, gostaria de agendar um atendimento sobre ${t}.`)}`} className="editorial-link mt-5 inline-block">Conversar sobre esta área <span aria-hidden="true">↗</span></a>
+                </Disclosure></div>
+              </motion.article>)}
             </div>
           </div>
         </section>
@@ -194,7 +234,7 @@ export default function Home() {
                 <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">INSCRIÇÃO PROFISSIONAL</dt><dd className="mt-2 text-sm font-medium">OAB/PA 43.942</dd></div>
               </dl>
             </motion.div>
-            <motion.figure {...fade} className="brand-portrait mx-auto w-full max-w-[400px] lg:justify-self-end">
+            <motion.figure {...fade} whileHover={reducedMotion ? undefined : { y: -4 }} transition={{ duration: .6 }} className="brand-portrait mx-auto w-full max-w-[400px] lg:justify-self-end">
               <Image src="/lucas/fotolucas.jpg" alt="Lucas Ruan Ferreira Gomes, advogado inscrito na OAB/PA 43.942" width={3024} height={4032} sizes="(min-width: 640px) 400px, calc(100vw - 40px)" className="relative z-[1] aspect-[3/4] h-auto w-full rounded-sm border border-[#0E2F36]/15 object-cover" />
             </motion.figure>
           </div>
@@ -203,7 +243,7 @@ export default function Home() {
         <section id="metodo" className="method-section relative isolate overflow-hidden bg-[#F7FAF8] py-28">
           <div className="container-shell">
             <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">MÉTODO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Método e acompanhamento em cada etapa.</h2></motion.div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[["01","Compreender","Sua história, seu contexto e seus objetivos."],["02","Estruturar","Caminhos jurídicos, riscos e possibilidades."],["03","Decidir","Recomendação técnica com segurança."],["04","Acompanhar","Implementação, ajustes e continuidade."]].map(([n,t,d]) => <motion.div key={n} {...fade} className="method-card border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.22em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.div>)}</div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[["01","Compreender","Sua história, seu contexto e seus objetivos."],["02","Estruturar","Caminhos jurídicos, riscos e possibilidades."],["03","Decidir","Recomendação técnica com segurança."],["04","Acompanhar","Implementação, ajustes e continuidade."]].map(([n,t,d], i) => <motion.div key={n} {...fade} transition={{ ...fade.transition, delay: i * .12 }} className="method-card border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.22em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.div>)}</div>
           </div>
         </section>
 
@@ -214,11 +254,26 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="duvidas" className="bg-[#F7FAF8] py-28">
+          <div className="container-shell grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+            <motion.div {...fade}>
+              <span className="section-label mb-4 inline-block text-[#2F6168]">ANTES DO PRIMEIRO CONTATO</span>
+              <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4rem)] leading-none">Clareza desde o início.</h2>
+              <p className="mt-6 leading-8 text-[#294047]">Entenda como iniciar o atendimento e organizar as informações sobre sua demanda.</p>
+            </motion.div>
+            <motion.div {...fade} className="faq-list">{faqs.map(([question, answer]) => <Disclosure key={question} title={question}><p className="leading-8 text-[#294047]">{answer}</p></Disclosure>)}</motion.div>
+          </div>
+        </section>
+
         <section id="contato" className="contact-section relative isolate overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell">
             <motion.div {...fade} className="grid gap-10 rounded-sm border border-white/20 bg-white/[.02] p-5 sm:p-8 lg:grid-cols-[1.1fr_.9fr] lg:p-12">
               <div><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-white/60">CONTATO</span><h2 className="font-newsreader text-[clamp(2.8rem,6vw,5rem)] leading-none">Orientação jurídica para decisões seguras.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">Entre em contato para apresentar sua demanda e agendar um atendimento.</p></div>
-              <div className="lg:pt-8"><a href="mailto:lrferreira.adv@outlook.com" className="institutional-button inline-flex rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar atendimento</a><div className="mt-8 grid gap-4 text-sm"><div><span className="block text-white/50">E-mail</span><a href="mailto:lrferreira.adv@outlook.com">lrferreira.adv@outlook.com</a></div><div><span className="block text-white/50">WhatsApp</span><a href="https://wa.me/5591991831921">+55 91 99183-1921</a></div><div><span className="block text-white/50">Site</span><a href="https://lrferreira.adv.br">lrferreira.adv.br</a></div></div></div>
+              <div className="lg:pt-8">
+                <p className="mb-5 text-sm leading-7 text-white/75">Apresente sua demanda diretamente ao escritório.</p>
+                <a href="https://wa.me/5591991831921?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20atendimento%20jur%C3%ADdico." className="institutional-button inline-flex rounded-sm bg-[#EFF3F0] px-6 py-3 text-[#0E2F36]">Agendar pelo WhatsApp <span aria-hidden="true" className="ml-4">↗</span></a>
+                <a href="mailto:lrferreira.adv@outlook.com" className="contact-email-action">Prefiro entrar em contato por e-mail <span aria-hidden="true">↗</span></a>
+                <div className="mt-8 grid gap-4 text-sm"><div><span className="block text-white/50">E-mail</span><a href="mailto:lrferreira.adv@outlook.com">lrferreira.adv@outlook.com</a></div><div><span className="block text-white/50">WhatsApp</span><a href="https://wa.me/5591991831921">+55 91 99183-1921</a></div><div><span className="block text-white/50">Site</span><a href="https://lrferreira.adv.br">lrferreira.adv.br</a></div></div></div>
             </motion.div>
           </div>
         </section>

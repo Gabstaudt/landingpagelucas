@@ -138,3 +138,36 @@ main h3 { line-height: 1.18; }
   .brand-portrait { padding: 0 0 12px 12px; }
   .method-section::before { left: 35%; opacity: .035; }
 }
+
+/* Deliberate motion and useful interactions. */
+.reading-progress { position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--sage); transform-origin: left; pointer-events: none; }
+.navigation-link { position: relative; }
+.navigation-link::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 1px; background: var(--sage); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+.navigation-link:hover::after, .navigation-link[aria-current="location"]::after { transform: scaleX(1); }
+.main-navigation .navigation-link[aria-current="location"] { color: var(--sage); }
+.disclosure { border-top: 1px solid #0e2f3626; }
+.disclosure-trigger { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px; min-height: 52px; padding: 14px 0; color: var(--deep); font-size: .8125rem; font-weight: 500; text-align: left; transition: color .2s ease; }
+.disclosure-trigger:hover { color: var(--medium); }
+.disclosure-icon { position: relative; display: block; flex: 0 0 16px; height: 16px; }
+.disclosure-icon span { position: absolute; top: 7px; left: 1px; height: 1px; width: 14px; background: currentColor; transition: transform .3s ease; }
+.disclosure-icon span:last-child { transform: rotate(90deg); }
+.is-expanded > .disclosure-trigger .disclosure-icon span:last-child { transform: rotate(0deg); }
+.disclosure-body { padding: 4px 0 18px; font-size: .875rem; }
+.practice-topics { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.practice-topics li { display: flex; gap: 12px; align-items: baseline; color: #294047; line-height: 1.7; }
+.practice-topics li::before { content: ""; width: 5px; height: 5px; flex: 0 0 5px; background: var(--medium); transform: rotate(45deg); }
+.practice-card:focus-within { border-color: var(--medium); background: #e7ede9; }
+.faq-list > .disclosure:last-child { border-bottom: 1px solid #0e2f3626; }
+.faq-list .disclosure-trigger { min-height: 82px; font-size: 1rem; font-weight: 400; }
+.faq-list .disclosure-body { padding: 0 28px 24px 0; font-size: 1rem; }
+.contact-email-action { display: flex; align-items: center; gap: 12px; width: fit-content; margin-top: 20px; min-height: 44px; font-size: .8125rem; color: #eff3f0bf; }
+.institutional-button { position: relative; overflow: hidden; }
+.institutional-button > span { display: inline-block; transition: transform .25s ease; }
+.institutional-button:hover > span { transform: translate(2px, -2px); }
+.method-card { position: relative; }
+.method-card::after { content: ""; position: absolute; top: -2px; left: 0; right: 0; height: 2px; background: var(--medium); transform: scaleX(0); transform-origin: left; transition: transform .6s ease; }
+.method-card:hover::after, .method-card:focus-within::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .navigation-link::after, .disclosure-icon span, .institutional-button > span, .method-card::after { transition: none; }
+  .institutional-button:hover > span { transform: none; }
+}
