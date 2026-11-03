@@ -154,17 +154,22 @@ export default function Home() {
 
         <section id="atuacao" className="bg-[#F7FAF8] py-28">
           <div className="container-shell">
-            <motion.div {...fade} className="max-w-3xl">
-              <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">ÁREAS DE ATUAÇÃO</span>
-              <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none tracking-[-.03em]">Atuação jurídica com análise criteriosa e orientação clara.</h2>
-            </motion.div>
+            <div className="practice-heading">
+              <motion.div {...fade} className="max-w-3xl">
+                <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">ÁREAS DE ATUAÇÃO</span>
+                <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none tracking-[-.03em]">Atuação jurídica com análise criteriosa e orientação clara.</h2>
+              </motion.div>
+              <motion.div {...fade} aria-hidden="true" className="hierarchy-detail">
+                <Image src="/assets/visual/linhas-hierarquia.svg" width={600} height={120} alt="" className="h-auto w-full" />
+              </motion.div>
+            </div>
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i*.04 }} className="practice-card min-h-64 border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.24em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.article>)}
             </div>
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
+        <section className="commitment-section relative overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell relative z-10">
             <motion.div {...fade} className="max-w-4xl">
               <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-white/60">COMPROMISSO</span>
@@ -189,13 +194,13 @@ export default function Home() {
                 <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">INSCRIÇÃO PROFISSIONAL</dt><dd className="mt-2 text-sm font-medium">OAB/PA 43.942</dd></div>
               </dl>
             </motion.div>
-            <motion.figure {...fade} className="mx-auto w-full max-w-[400px] overflow-hidden rounded-sm border border-[#0E2F36]/15 lg:justify-self-end">
-              <Image src="/lucas/fotolucas.jpg" alt="Lucas Ruan Ferreira Gomes, advogado inscrito na OAB/PA 43.942" width={3024} height={4032} sizes="(min-width: 640px) 400px, calc(100vw - 40px)" className="aspect-[3/4] h-auto w-full object-cover" />
+            <motion.figure {...fade} className="brand-portrait mx-auto w-full max-w-[400px] lg:justify-self-end">
+              <Image src="/lucas/fotolucas.jpg" alt="Lucas Ruan Ferreira Gomes, advogado inscrito na OAB/PA 43.942" width={3024} height={4032} sizes="(min-width: 640px) 400px, calc(100vw - 40px)" className="relative z-[1] aspect-[3/4] h-auto w-full rounded-sm border border-[#0E2F36]/15 object-cover" />
             </motion.figure>
           </div>
         </section>
 
-        <section id="metodo" className="bg-[#F7FAF8] py-28">
+        <section id="metodo" className="method-section relative isolate overflow-hidden bg-[#F7FAF8] py-28">
           <div className="container-shell">
             <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">MÉTODO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Método e acompanhamento em cada etapa.</h2></motion.div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[["01","Compreender","Sua história, seu contexto e seus objetivos."],["02","Estruturar","Caminhos jurídicos, riscos e possibilidades."],["03","Decidir","Recomendação técnica com segurança."],["04","Acompanhar","Implementação, ajustes e continuidade."]].map(([n,t,d]) => <motion.div key={n} {...fade} className="method-card border border-[#0E2F36]/15 bg-[#EFF3F0] p-7"><span className="text-sm tracking-[.22em] text-[#2F6168]">{n}</span><h3 className="font-newsreader mt-6 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p></motion.div>)}</div>
@@ -209,7 +214,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contato" className="bg-[#0E2F36] py-28 text-[#EFF3F0]">
+        <section id="contato" className="contact-section relative isolate overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell">
             <motion.div {...fade} className="grid gap-10 rounded-sm border border-white/20 bg-white/[.02] p-5 sm:p-8 lg:grid-cols-[1.1fr_.9fr] lg:p-12">
               <div><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-white/60">CONTATO</span><h2 className="font-newsreader text-[clamp(2.8rem,6vw,5rem)] leading-none">Orientação jurídica para decisões seguras.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">Entre em contato para apresentar sua demanda e agendar um atendimento.</p></div>

@@ -112,3 +112,29 @@ main h3 { line-height: 1.18; }
 @media (prefers-reduced-motion: reduce) {
   .hero-scroll-line::after { animation: none; top: 25%; }
 }
+
+/* Supplied brand elements, used at restrained scales. */
+.hero-eyebrow::before {
+  width: 12px;
+  height: 12px;
+  background: var(--sage);
+  -webkit-mask: url('/assets/visual/losango.svg') center / contain no-repeat;
+  mask: url('/assets/visual/losango.svg') center / contain no-repeat;
+}
+.practice-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.practice-heading > :first-child { min-width: 0; }
+.hierarchy-detail { flex: 0 0 160px; padding-bottom: 8px; }
+.brand-portrait { position: relative; padding: 0 0 14px 14px; }
+.brand-portrait::before { content: ""; position: absolute; left: 0; bottom: 0; width: 75%; aspect-ratio: 1; background: url('/assets/visual/esquadro-moldura.svg') left bottom / contain no-repeat; opacity: .85; pointer-events: none; }
+.commitment-section::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: url('/assets/visual/simbolo-recortado_fundo-16x9.svg') right center / cover no-repeat; opacity: .52; -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000); mask-image: linear-gradient(90deg, transparent 30%, #000); }
+.method-section::before { content: ""; position: absolute; z-index: -1; inset: 0 0 0 58%; pointer-events: none; background: url('/assets/visual/pauta-normativa_1024.svg') right top / 700px repeat; mix-blend-mode: multiply; opacity: .055; -webkit-mask-image: linear-gradient(90deg, transparent, #000); mask-image: linear-gradient(90deg, transparent, #000); }
+.contact-section::before { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: url('/assets/visual/padrao-losangos_tile.svg') center / 64px 64px repeat; opacity: .35; -webkit-mask-image: linear-gradient(125deg, transparent 35%, #000); mask-image: linear-gradient(125deg, transparent 35%, #000); }
+.contact-section > .container-shell { position: relative; }
+.contact-section > .container-shell > div { background: #0e2f36e8; }
+@media (max-width: 767px) {
+  .practice-heading { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .hierarchy-detail { flex-basis: auto; width: 100px; padding-bottom: 0; }
+  .commitment-section::before { opacity: .3; background-position: 65% center; }
+  .brand-portrait { padding: 0 0 12px 12px; }
+  .method-section::before { left: 35%; opacity: .035; }
+}
