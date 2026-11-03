@@ -39,7 +39,7 @@ const insights = [
   ["EMPRESAS", "O jurídico presente nas decisões do negócio.", "Prevenção de conflitos e organização das relações comerciais."]
 ];
 
-const fade = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: .2 }, transition: { duration: .75, ease: [0.2, 0.8, 0.2, 1] as const } };
+const fade = { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: .2 }, transition: { duration: .65, ease: [0.2, 0.8, 0.2, 1] as const } };
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -60,7 +60,8 @@ export default function Home() {
   const symbolX = useTransform(() => travelX.get() + (dock.x - travelX.get()) * dockProgress.get());
   const symbolY = useTransform(() => travelY.get() + (dock.y - travelY.get()) * dockProgress.get());
   const symbolRotate = useTransform(smoothProgress, [0, 1], [0, 360]);
-  const floatingOpacity = useTransform(dockProgress, [0, .8, 1], [.14, .14, 0]);
+  const travelOpacity = useTransform(smoothScroll, [0, 600], [.14, .045]);
+  const floatingOpacity = useTransform(() => travelOpacity.get() * (1 - dockProgress.get()));
 
   useEffect(() => {
     let frame = 0;
@@ -120,7 +121,7 @@ export default function Home() {
 
       </AnimatePresence>
 
-      <motion.div aria-hidden="true" style={{ opacity: reducedMotion ? 0 : floatingOpacity }} className="pointer-events-none fixed inset-0 z-20 overflow-hidden mix-blend-difference">
+      <motion.div aria-hidden="true" style={{ opacity: reducedMotion || activeSection === "contato" || activeSection === "duvidas" ? 0 : floatingOpacity }} className="scroll-symbol pointer-events-none fixed inset-0 z-20 overflow-hidden mix-blend-difference">
         <motion.div
           data-scroll-logo
           style={{ x: reducedMotion ? 0 : symbolX, y: reducedMotion ? 0 : symbolY, scale: reducedMotion ? .20 : symbolScale, transformOrigin: "bottom right" }}
@@ -205,15 +206,17 @@ export default function Home() {
                 <Image src="/assets/visual/linhas-hierarquia.svg" width={600} height={120} alt="" className="h-auto w-full" />
               </motion.div>
             </div>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i*.06 }} className="practice-card flex min-h-64 flex-col border border-[#0E2F36]/15 bg-[#EFF3F0] p-7">
-                <span className="text-sm tracking-[.24em] text-[#2F6168]">{n}</span>
-                <h3 className="font-newsreader mt-6 text-3xl">{t}</h3>
-                <p className="mb-6 mt-4 leading-7 text-[#294047]">{d}</p>
-                <div className="mt-auto"><Disclosure title="Como posso ajudar" context={t}>
-                  <ul className="practice-topics">{practiceTopics[i].map(topic => <li key={topic}>{topic}</li>)}</ul>
-                  <a href={`https://wa.me/5591991831921?text=${encodeURIComponent(`Olá, gostaria de agendar um atendimento sobre ${t}.`)}`} className="editorial-link mt-5 inline-block">Conversar sobre esta área <span aria-hidden="true">↗</span></a>
-                </Disclosure></div>
+            <div className="practice-list">
+              {practices.map(([n,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: (i % 3)*.05 }} className="practice-row">
+                <span className="practice-index">{n}</span>
+                <h3 className="font-newsreader practice-name">{t}</h3>
+                <div className="practice-description">
+                  <p>{d}</p>
+                  <Disclosure title="Como posso ajudar" context={t}>
+                    <ul className="practice-topics">{practiceTopics[i].map(topic => <li key={topic}>{topic}</li>)}</ul>
+                    <a href={`https://wa.me/5591991831921?text=${encodeURIComponent(`Olá, gostaria de agendar um atendimento sobre ${t}.`)}`} className="editorial-link mt-5 inline-block">Conversar sobre esta área <span aria-hidden="true">↗</span></a>
+                  </Disclosure>
+                </div>
               </motion.article>)}
             </div>
           </div>
@@ -229,24 +232,24 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="sobre" className="bg-[#EFF3F0] py-28">
-          <div className="container-shell grid items-center gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
-            <motion.div {...fade} className="min-w-0">
-              <span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">SOBRE MIM</span>
-              <h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Lucas Ruan Ferreira Gomes</h2>
-              <p className="mt-4 text-sm font-medium tracking-[.12em] text-[#2F6168]">ADVOGADO · OAB/PA 43.942</p>
-              <div className="mt-6 max-w-2xl space-y-5 text-lg leading-8 text-[#294047]">
+        <section id="sobre" className="about-section bg-[#EFF3F0] py-28">
+          <div className="container-shell about-editorial">
+            <motion.div {...fade} className="about-heading">
+              <span className="section-label mb-5 inline-block text-[#2F6168]">SOBRE MIM</span>
+              <h2 className="font-newsreader">Lucas Ruan<br className="hidden lg:block" /> Ferreira Gomes</h2>
+              <p className="about-registration">ADVOGADO · OAB/PA 43.942</p>
+            </motion.div>
+            <motion.figure {...fade} transition={{ ...fade.transition, delay: .08 }} className="about-portrait">
+              <div className="brand-portrait">
+                <Image src="/lucas/fotolucas.jpg" alt="Lucas Ruan Ferreira Gomes, advogado inscrito na OAB/PA 43.942" width={3024} height={4032} sizes="(min-width: 1024px) 440px, (min-width: 640px) 400px, calc(100vw - 40px)" className="relative z-[1] aspect-[3/4] h-auto w-full object-cover" />
+              </div>
+              <figcaption><span>FORMAÇÃO EM DIREITO</span><span>UNAMA</span></figcaption>
+            </motion.figure>
+            <motion.div {...fade} transition={{ ...fade.transition, delay: .12 }} className="about-biography">
                 <p>Lucas Ruan Ferreira Gomes é advogado, natural de Belém do Pará, e está à frente da L R Ferreira Advocacia. Aprovado no 44º Exame de Ordem ainda no 9º período da graduação, construiu sua trajetória com disciplina nos estudos e compromisso com a qualidade técnica, valores que hoje definem sua prática profissional.</p>
                 <p>Seu trabalho une organização, proatividade e preparo: antecipar riscos, estruturar cada etapa cuidadosamente e fundamentar cada orientação com rigor. A comunicação é sempre clara e acessível, para que cada cliente compreenda seus direitos, suas alternativas e os próximos passos.</p>
-              </div>
-              <dl className="mt-8 grid gap-5 border-t border-[#0E2F36]/15 pt-6 sm:grid-cols-2">
-                <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">FORMAÇÃO</dt><dd className="mt-2 text-sm font-medium">Direito · UNAMA</dd></div>
-                <div><dt className="text-xs tracking-[.12em] text-[#2F6168]">INSCRIÇÃO PROFISSIONAL</dt><dd className="mt-2 text-sm font-medium">OAB/PA 43.942</dd></div>
-              </dl>
+              <div className="about-signature"><Image src="/assets/brand/horizontal-light.svg" alt="L R Ferreira Advocacia" width={1200} height={388} className="h-auto w-40" /><a href="#contato" className="editorial-link">Iniciar uma conversa <span aria-hidden="true">↗</span></a></div>
             </motion.div>
-            <motion.figure {...fade} whileHover={reducedMotion ? undefined : { y: -4 }} transition={{ duration: .6 }} className="brand-portrait mx-auto w-full max-w-[400px] lg:justify-self-end">
-              <Image src="/lucas/fotolucas.jpg" alt="Lucas Ruan Ferreira Gomes, advogado inscrito na OAB/PA 43.942" width={3024} height={4032} sizes="(min-width: 640px) 400px, calc(100vw - 40px)" className="relative z-[1] aspect-[3/4] h-auto w-full rounded-sm border border-[#0E2F36]/15 object-cover" />
-            </motion.figure>
           </div>
         </section>
 
@@ -260,7 +263,12 @@ export default function Home() {
         <section id="insights" className="bg-[#EFF3F0] py-28">
           <div className="container-shell">
             <motion.div {...fade} className="max-w-3xl"><span className="section-label mb-4 inline-block text-sm tracking-[.3em] text-[#2F6168]">CONTEÚDO JURÍDICO</span><h2 className="font-newsreader text-[clamp(2.6rem,5vw,4.3rem)] leading-none">Informação jurídica para decisões conscientes.</h2></motion.div>
-            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{insights.map(([tag,t,d]) => <motion.article key={t} {...fade} className="insight-card flex min-h-72 flex-col border border-[#0E2F36]/15 bg-white/35 p-7"><span className="text-xs tracking-[.22em] text-[#2F6168]">{tag}</span><h3 className="font-newsreader mt-5 text-3xl">{t}</h3><p className="mt-4 leading-7 text-[#294047]">{d}</p><a href={`https://wa.me/5591991831921?text=${encodeURIComponent(`Olá, gostaria de conversar sobre ${tag.toLowerCase()}: ${t}`)}`} className="editorial-link mt-auto pt-8">Conversar sobre o tema <span aria-hidden="true">↗</span></a></motion.article>)}</div>
+            <div className="insight-editorial">{insights.map(([tag,t,d], i) => <motion.article key={t} {...fade} transition={{ ...fade.transition, delay: i * .07 }} className={`insight-entry ${i === 0 ? "insight-lead" : ""}`}>
+              <div className="insight-meta"><span>{tag}</span><span aria-hidden="true">0{i + 1}</span></div>
+              <h3 className="font-newsreader">{t}</h3>
+              <p>{d}</p>
+              <a href={`https://wa.me/5591991831921?text=${encodeURIComponent(`Olá, gostaria de conversar sobre ${tag.toLowerCase()}: ${t}`)}`} className="editorial-link">Conversar sobre o tema <span aria-hidden="true">↗</span></a>
+            </motion.article>)}</div>
           </div>
         </section>
 
@@ -277,9 +285,10 @@ export default function Home() {
 
         <section id="contato" className="contact-section relative isolate overflow-hidden bg-[#0E2F36] py-28 text-[#EFF3F0]">
           <div className="container-shell">
+            <motion.div {...fade} className="contact-section-heading"><span className="section-label">CONTATO</span><span>ATENÇÃO A CADA HISTÓRIA. CLAREZA EM CADA PASSO.</span></motion.div>
             <div className="contact-layout">
               <motion.div {...fade} className="contact-intro">
-                <span className="section-label mb-4 inline-block text-white/60">SEU PRÓXIMO PASSO</span>
+                <span className="section-label mb-4 inline-block text-[#A9BDB5]">SEU PRÓXIMO PASSO</span>
                 <h2 className="font-newsreader text-[clamp(2.8rem,5.5vw,5rem)] leading-none">Vamos cuidar do que importa para você.</h2>
                 <p className="mt-7 max-w-xl text-lg leading-8 text-white/75">Uma conversa para compreender sua demanda, organizar as informações e avaliar os próximos passos.</p>
                 <div className="contact-lawyer">

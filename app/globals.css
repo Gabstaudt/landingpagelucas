@@ -72,10 +72,6 @@ main h3 { line-height: 1.18; }
 .main-navigation { font-size: .875rem; }
 .institutional-button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; font-size: .875rem; font-weight: 500; letter-spacing: .025em; transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
 .institutional-button:hover { background-color: #dce6e0; color: var(--deep); border-color: #dce6e0; }
-.practice-card { border-top: 2px solid var(--medium); transition: border-color .25s ease, background-color .25s ease; }
-.practice-card:hover { background-color: #e7ede9; border-color: var(--medium); }
-.method-card { border-top: 2px solid #a9bdb5; }
-.institutional-panel { border-left: 2px solid var(--medium); }
 .institutional-image img { filter: saturate(.72); }
 .editorial-link { font-size: .8125rem; font-weight: 500; color: var(--medium); text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #a9bdb5; transition: color .2s ease; }
 .editorial-link:hover { color: var(--deep); }
@@ -156,17 +152,12 @@ main h3 { line-height: 1.18; }
 .practice-topics { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .practice-topics li { display: flex; gap: 12px; align-items: baseline; color: #294047; line-height: 1.7; }
 .practice-topics li::before { content: ""; width: 5px; height: 5px; flex: 0 0 5px; background: var(--medium); transform: rotate(45deg); }
-.practice-card:focus-within { border-color: var(--medium); background: #e7ede9; }
 .faq-list > .disclosure:last-child { border-bottom: 1px solid #0e2f3626; }
 .faq-list .disclosure-trigger { min-height: 82px; font-size: 1rem; font-weight: 400; }
 .faq-list .disclosure-body { padding: 0 28px 24px 0; font-size: 1rem; }
-.contact-email-action { display: flex; align-items: center; gap: 12px; width: fit-content; margin-top: 20px; min-height: 44px; font-size: .8125rem; color: #eff3f0bf; }
 .institutional-button { position: relative; overflow: hidden; }
 .institutional-button > span { display: inline-block; transition: transform .25s ease; }
 .institutional-button:hover > span { transform: translate(2px, -2px); }
-.method-card { position: relative; }
-.method-card::after { content: ""; position: absolute; top: -2px; left: 0; right: 0; height: 2px; background: var(--medium); transform: scaleX(0); transform-origin: left; transition: transform .6s ease; }
-.method-card:hover::after, .method-card:focus-within::after { transform: scaleX(1); }
 @media (prefers-reduced-motion: reduce) {
   .navigation-link::after, .disclosure-icon span, .institutional-button > span, .method-card::after { transition: none; }
   .institutional-button:hover > span { transform: none; }
@@ -257,4 +248,95 @@ main h3 { line-height: 1.18; }
   .process-step-summary { font-size: .75rem; }
   .process-panel { padding: 24px 20px; }
   .process-panel-content { grid-template-columns: 1fr; gap: 20px; min-height: 340px; }
+}
+
+/* Editorial layout: distinct rhythms, open lists and a focused closing section. */
+main h2 { font-size: clamp(2.1rem, 3.8vw, 3.7rem); line-height: 1.1; letter-spacing: -.025em; }
+main .commitment-section h2 { font-size: clamp(2.5rem, 5vw, 4.4rem); }
+.practice-heading { align-items: center; }
+.practice-heading h2 { max-width: 760px; }
+.practice-list { margin-top: 56px; border-top: 1px solid #0e2f3640; }
+.practice-row { display: grid; grid-template-columns: 48px minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 36px; align-items: start; border-bottom: 1px solid #0e2f3626; padding-block: 32px; }
+.practice-index { font-size: .6875rem; letter-spacing: .1em; color: var(--medium); padding-top: 9px; }
+.practice-name { font-size: clamp(1.6rem, 2.4vw, 2.15rem); line-height: 1.18; max-width: 330px; }
+.practice-description { min-width: 0; }
+.practice-description > p { max-width: 52ch; color: #294047; font-size: .9375rem; line-height: 1.85; }
+.practice-description .disclosure { border: 0; margin-top: 10px; }
+.practice-description .disclosure-trigger { min-height: 44px; padding-block: 10px; font-size: .75rem; color: var(--medium); }
+.practice-row:focus-within .practice-name { color: var(--medium); }
+.about-section { border-bottom: 1px solid #0e2f3612; }
+.about-editorial { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); grid-template-areas: "portrait heading" "portrait biography"; column-gap: clamp(48px, 7vw, 112px); row-gap: 28px; align-items: start; }
+.about-heading { grid-area: heading; }
+.about-heading h2 { max-width: 610px; }
+.about-registration { margin-top: 22px; font-size: .6875rem; letter-spacing: .14em; font-weight: 500; color: var(--medium); }
+.about-portrait { grid-area: portrait; padding-top: 6px; }
+.about-portrait figcaption { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 22px; margin-left: 14px; font-size: .625rem; letter-spacing: .12em; color: var(--medium); }
+.about-portrait figcaption span:last-child { font-size: .75rem; letter-spacing: .08em; }
+.about-biography { grid-area: biography; min-width: 0; }
+.about-biography > p { max-width: 64ch; color: #294047; font-size: 1rem; line-height: 1.95; }
+.about-biography > p + p { margin-top: 22px; }
+.about-signature { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-top: 32px; padding-top: 28px; border-top: 1px solid #0e2f3626; }
+.insight-editorial { display: grid; grid-template-columns: 1.1fr 1fr; column-gap: 64px; margin-top: 52px; border-top: 1px solid #0e2f3640; }
+.insight-entry { display: flex; flex-direction: column; align-items: flex-start; padding-block: 28px; border-bottom: 1px solid #0e2f3626; min-width: 0; }
+.insight-lead { grid-row: span 2; padding: 36px 56px 36px 0; border-right: 1px solid #0e2f3626; }
+.insight-meta { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; color: var(--medium); font-size: .625rem; letter-spacing: .14em; }
+.insight-entry h3 { margin-top: 22px; font-size: 1.8rem; max-width: 26ch; }
+.insight-lead h3 { font-size: clamp(2.2rem, 3.6vw, 3.3rem); margin-top: 40px; max-width: 16ch; }
+.insight-entry > p { font-size: .9375rem; line-height: 1.9; color: #294047; margin-top: 18px; max-width: 46ch; }
+.insight-entry .editorial-link { margin-top: 22px; padding-block: 8px; }
+.insight-lead .editorial-link { margin-top: auto; padding-top: 40px; }
+.contact-section { background: linear-gradient(125deg, #081f25, #0e2f36 65%, #173e43); padding-top: 64px; }
+.contact-section::before { opacity: .2; }
+.contact-section > .container-shell > .contact-layout { background: none; }
+.contact-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 26px; margin-bottom: 56px; border-bottom: 1px solid #a9bdb540; color: var(--sage); }
+.contact-section-heading > span:last-child { font-size: .5625rem; letter-spacing: .12em; color: #eff3f080; }
+.contact-layout { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(48px, 6vw, 88px); }
+.contact-intro { padding-top: 20px; }
+main #contato h2 { font-size: clamp(2.5rem, 4.5vw, 4.25rem); max-width: 12ch; }
+.contact-intro > p { font-size: 1rem; line-height: 1.9; max-width: 43ch; }
+.contact-lawyer { margin-top: 36px; padding-block: 24px; gap: 16px; border-bottom: 0; }
+.contact-lawyer .font-newsreader { font-size: 1.4rem; }
+.contact-lawyer img { width: 48px; height: 64px; }
+.contact-direct-details { margin-top: 4px; padding-top: 10px; border-top: 1px solid #a9bdb526; }
+.contact-guide { position: relative; padding: 36px; background: #f3f4ef; border: 0; border-top: 3px solid #a9bdb5; box-shadow: none; }
+.guide-heading { font-size: clamp(1.85rem, 2.8vw, 2.5rem); }
+@media (max-width: 1023px) {
+  .about-editorial { column-gap: 40px; }
+  .about-heading h2 { font-size: 2.7rem; }
+  .about-heading br { display: none; }
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+  .contact-intro { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .contact-intro > .section-label, .contact-intro > h2, .contact-intro > p { grid-column: 1 / -1; }
+  .contact-intro > p { max-width: 52ch; }
+  .contact-lawyer { margin-top: 24px; }
+  .contact-direct-details { margin-top: 24px; padding-top: 24px; }
+  .contact-guide { max-width: none; }
+}
+@media (max-width: 767px) {
+  .practice-list { margin-top: 36px; }
+  .practice-row { grid-template-columns: 24px minmax(0, 1fr); column-gap: 16px; row-gap: 18px; padding-block: 26px; }
+  .practice-description { grid-column: 2; }
+  .practice-name { font-size: 1.65rem; }
+  .practice-index { padding-top: 7px; }
+  .about-editorial { grid-template-columns: 1fr; grid-template-areas: "heading" "portrait" "biography"; gap: 32px; }
+  .about-portrait { max-width: 400px; width: 100%; justify-self: center; padding-top: 0; }
+  .about-heading h2 { font-size: clamp(2.1rem, 7vw, 2.9rem); }
+  .about-heading { max-width: 500px; }
+  .about-biography > p { font-size: .9375rem; line-height: 1.95; }
+  .about-signature { gap: 20px; }
+  .insight-editorial { grid-template-columns: 1fr; margin-top: 36px; }
+  .insight-lead { grid-row: auto; padding: 30px 0; border-right: 0; }
+  .insight-lead h3 { font-size: 2.3rem; margin-top: 26px; }
+  .insight-lead .editorial-link { margin-top: 22px; padding-top: 8px; }
+  .insight-entry:not(.insight-lead) h3 { font-size: 1.65rem; }
+  .contact-section-heading { margin-bottom: 36px; padding-bottom: 20px; }
+  .contact-section-heading > span:last-child { max-width: 140px; text-align: right; line-height: 1.8; font-size: .5rem; }
+  .contact-intro { display: block; padding-top: 0; }
+  .contact-lawyer, .contact-direct-details { margin-top: 24px; }
+  .contact-guide { padding: 26px 20px; }
+  main #contato h2 { max-width: 14ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-symbol { display: none; }
 }
